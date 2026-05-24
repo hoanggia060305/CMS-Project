@@ -1,0 +1,31 @@
+﻿/*
+ * Sinh vien:Nguyen Hoang Gia
+ * Ma sv:2123110021
+ * Version 1.0
+ * Ngay thuc hien :14/05/2026
+ */
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CMS.Data.Entities
+{
+    //thuc the danh muc bai viet
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } // Tên danh mục (vd: Tin Giáo Dục)
+        public string Description { get; set; }
+
+        // Quan hệ: Một danh mục có nhiều bài viết
+        public virtual ICollection<Post> Post { get; set; }
+    }
+}
