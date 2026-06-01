@@ -72,9 +72,11 @@ using CMS.Data.Entities; // Quan trọng: Phải có dòng này để dùng lớ
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Backend.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -119,7 +121,7 @@ namespace CMS.Backend.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            // Chúng ta lấy danh sách Category để đổ vào ViewBag
+            // We take the Category list to fill in the ViewBag
             ViewBag.CategoryList = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // Thêm dòng này để dùng các hàm mở rộng của EF Core (như ToListAsync nếu cần)
 using CMS.Data.Entities; // Kết nối tới các lớp thực thể dữ liệu
 using CMS.Data; // Bắt buộc có để nhận diện lớp ApplicationDbContext
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Backend.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -73,7 +75,7 @@ namespace CMS.Backend.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            // Tìm danh mục trong Database theo Id [cite: 348, 350]
+            // Tìm danh mục trong Database theo Id
             var category = _context.Categories.Find(id);
 
             if (category == null) return NotFound();
@@ -88,7 +90,7 @@ namespace CMS.Backend.Controllers
             // Lệnh cập nhật đối tượng vào bộ nhớ tạm
             _context.Categories.Update(model);
 
-            // Lưu thay đổi thực sự xuống SQL Server [cite: 504, 509]
+            // Lưu thay đổi thực sự xuống SQL Server
             _context.SaveChanges();
 
             // Quay lại trang danh sách để xem kết quả
