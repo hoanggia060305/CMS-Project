@@ -117,6 +117,7 @@ namespace CMS.Backend.Controllers
             // 3. Truyền dữ liệu sang View
             return View(post);
         }
+
         // 1. Hàm hiển thị form tạo mới bài viết (GET)
         [HttpGet]
         public IActionResult Create()
@@ -125,8 +126,6 @@ namespace CMS.Backend.Controllers
             ViewBag.CategoryList = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
-
-
 
         [HttpPost]
         public IActionResult Create(Post model, IFormFile uploadImage)
@@ -157,6 +156,7 @@ namespace CMS.Backend.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
         public IActionResult Delete(int id)
         {
             // 1. Tìm bài viết theo Id
@@ -223,6 +223,54 @@ namespace CMS.Backend.Controllers
         }
 
 
+        // =========================================================================
+        // PHẦN THÊM MỚI CHO BUỔI 6: CÁC HÀM WEB API TRẢ VỀ DỮ LIỆU ĐỊNH DẠNG JSON
+        // =========================================================================
 
+        // Đường dẫn test danh sách JSON: https://localhost:7072/Post/GetPostsJson
+        [HttpGet]
+        public IActionResult GetPostsJson()
+        {
+            var posts = _context.Posts
+                                .Include(p => p.Category)
+                                .OrderByDescending(p => p.Id)
+                                .Select(p => new {
+                                    p.Id,
+                                    p.Title,
+                                    p.Content,
+                                    p.ImageUrl,
+                                    p.CategoryId,
+                                    CategoryName = p.Category != null ? p.Category.Name : "Chưa phân loại"
+                                })
+                                .ToList();
+
+            return Json(posts); // Trả về định dạng JSON thuần chủng theo đúng yêu cầu Buổi 6
+        }
+
+        // Đường dẫn test chi tiết JSON: https://localhost:7072/Post/GetPostDetailsJson/1
+        [HttpGet]
+        public IActionResult GetPostDetailsJson(int id)
+        {
+            var post = _context.Posts
+                               .Include(p => p.Category)
+                               .FirstOrDefault(p => p.Id == id);
+
+            if (post == null)
+            {
+                return Json(new { message = $"Không tìm thấy bài viết nào có ID = {id}" });
+            }
+
+            var result = new
+            {
+                post.Id,
+                post.Title,
+                post.Content,
+                post.ImageUrl,
+                post.CategoryId,
+                CategoryName = post.Category != null ? post.Category.Name : "Chưa phân loại"
+            };
+
+            return Json(result); // Trả về định dạng JSON chi tiết bài viết
+        }
     }
 }
