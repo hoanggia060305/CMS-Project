@@ -1,0 +1,47 @@
+﻿@model CMS.Data.Entities.Product
+
+<h2>SỬA SẢN PHẨM</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Tên sản phẩm</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Giá</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Số lượng</label>
+        <input asp-for="StockQuantity" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Đường dẫn hình ảnh</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <small class="text-muted">Ví dụ: /images/roblox.jpg</small>
+    </div>
+
+    <div class="mb-3">
+        <label>Danh mục sản phẩm</label>
+        <input asp-for="CategoryProductId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Ảnh hiện tại</label><br />
+        <img src="@Model.ImageUrl" width="150" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

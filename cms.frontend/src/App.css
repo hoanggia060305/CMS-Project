@@ -1,38 +1,193 @@
-.App {
-  text-align: center;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #111827;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    height: 70px;
+    background: #111827;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    gap: 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.nav-links {
+    display: flex;
+    gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+    .nav-links a {
+        color: #d1d5db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+.search-box {
+    margin-left: auto;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    width: 260px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-content {
+    min-height: 75vh;
+}
+
+.hero {
+    background: linear-gradient(135deg, #1f2937, #2563eb);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+    .hero h1 {
+        font-size: 44px;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+.category-menu {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 25px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+    .category-menu button {
+        padding: 10px 18px;
+        border: none;
+        background: #2563eb;
+        color: white;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+        .category-menu button:hover {
+            background: #1d4ed8;
+        }
+
+h1, h2 {
+    text-align: center;
+}
+
+.product-grid,
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 30px 50px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+
+    .card h3 {
+        padding: 0 15px;
+    }
+
+    .card p {
+        padding: 0 15px;
+        color: #555;
+    }
+
+    .card a {
+        display: inline-block;
+        margin: 15px;
+        padding: 10px 14px;
+        background: #16a34a;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+.detail {
+    max-width: 850px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+    .detail img {
+        width: 100%;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+.footer {
+    background: #111827;
+    color: #d1d5db;
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+    .footer h3 {
+        color: white;
+    }
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    .search-box {
+        margin-left: 0;
+        width: 90%;
+    }
+
+    .product-grid,
+    .blog-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    .price {
+        color: #16a34a;
+        font-size: 20px;
+        font-weight: bold;
+    }
 }
